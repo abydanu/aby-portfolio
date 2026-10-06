@@ -12,7 +12,6 @@ export const id: Locale = {
     landing: {
       hi: 'Halo, aku',
       role: 'AI & Backend Engineer',
-      tagline: 'Membangun backend yang scalable dan terus belajar tentang AI/ML.',
     },
     topbar: {
       thinking: 'lagi mikir',
@@ -284,7 +283,6 @@ export const id: Locale = {
   },
   profile: {
     role: 'AI & Backend Engineer',
-    tagline: 'Membangun backend yang scalable dan terus belajar tentang AI/ML.',
     focus: 'Backend · AI/ML',
     status: 'Terbuka untuk ber kolaborasi',
     education: 'Sistem Informasi · UNESA',
@@ -374,7 +372,7 @@ export const id: Locale = {
       case 'erp':
         return `Ini ${count} project yang berkaitan dengan ERP.`
       default:
-        return `Ini ${count} project dari portfolio Aby—mulai dari backend yang sudah dipakai di production sampai beberapa project AI.`
+        return `Ini ${count} project dari portfolio Aby mulai dari backend yang sudah dipakai di production sampai beberapa project AI.`
     }
   },
   prompts: {

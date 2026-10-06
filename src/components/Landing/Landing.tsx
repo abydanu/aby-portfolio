@@ -25,12 +25,6 @@ export function Landing() {
       >
         {lp.role}
       </p>
-      <p
-        className="animate-rise mx-auto mt-5 max-w-md text-base leading-relaxed text-muted md:text-lg"
-        style={{ animationDelay: '220ms' }}
-      >
-        {lp.tagline}
-      </p>
     </section>
   )
 }

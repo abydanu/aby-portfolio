@@ -26,8 +26,6 @@ export function Conversation({ messages, phase, morphId, onPrompt, onSettle }: P
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Short answers follow the bottom. Long ones stay anchored at the visitor's own prompt,
-  // so the start of the answer is never scrolled out of view.
   const scrollEnd = useCallback((force = false) => {
     if (!force && !stick.current) return
     const endY = document.documentElement.scrollHeight - window.innerHeight

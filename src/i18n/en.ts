@@ -14,7 +14,6 @@ export const en: Locale = {
     landing: {
       hi: "Hi, I'm",
       role: 'AI & Backend Engineer',
-      tagline: 'I build backend systems, build AI apps, and keep learning',
     },
     topbar: {
       thinking: 'thinking',
@@ -174,7 +173,6 @@ export const en: Locale = {
   },
   profile: {
     role: 'AI & Backend Engineer',
-    tagline: 'I build backend systems, build AI apps, and keep learning.',
     focus: 'Backend · AI/ML',
     status: 'Open to opportunities',
     education: 'Information Systems · UNESA',

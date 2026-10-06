@@ -6,7 +6,6 @@ interface Props {
   className?: string
 }
 
-/** The assistant's mark. Breathes when idle, orbits faster while thinking. */
 export function Presence({ size = 24, state = 'idle', className = '' }: Props) {
   return (
     <span

@@ -5,7 +5,7 @@ export type Language = 'en' | 'id'
 
 export interface Locale {
   ui: {
-    landing: { hi: string; role: string; tagline: string }
+    landing: { hi: string; role: string; }
     topbar: { thinking: string; online: string; new: string; newSession: string }
     input: { placeholder: string; placeholderFollowUp: string; askLabel: string; sendLabel: string }
     keyboard: { send: string; newline: string; focus: string }
@@ -57,7 +57,6 @@ export interface Locale {
   }
   profile: {
     role: string
-    tagline: string
     focus: string
     status: string
     education: string

@@ -70,7 +70,7 @@ export function TopBar({ started, thinking, onReset }: Props) {
           {started && (
             <button
               onClick={onReset}
-              className="flex items-center gap-1.5 rounded-full border border-line-strong px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted transition-colors hover:border-accent/60 hover:text-fg"
+              className="flex items-center gap-1.5 rounded-full border border-line-strong px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted transition-colors hover:border-accent/60 hover:text-fg cursor-pointer"
             >
               <RotateCcw size={11} /> {t.new}
             </button>
