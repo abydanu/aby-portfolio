@@ -1,8 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
+import { useLanguage } from '../../hooks/useLanguage'
+import type { Block, PromptHandler } from '../../types'
 import { ProjectDetail } from '../ProjectDetail/ProjectDetail'
 import { Presence } from '../Presence/Presence'
-import type { Block, PromptHandler } from '../../types'
 
 interface Props {
   block: Block
@@ -26,6 +27,7 @@ function Frame({ label, children }: { label: string; children: ReactNode }) {
 }
 
 function CopyEmail({ email }: { email: string }) {
+  const { locale } = useLanguage()
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -42,12 +44,14 @@ function CopyEmail({ email }: { email: string }) {
       className="flex shrink-0 items-center gap-1.5 rounded-full border border-line-strong px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-muted transition-colors hover:border-accent/60 hover:text-fg"
     >
       {copied ? <Check size={11} className="text-accent" /> : <Copy size={11} />}
-      {copied ? 'Copied' : 'Copy'}
+      {copied ? locale.ui.responseCard.copied : locale.ui.responseCard.copy}
     </button>
   )
 }
 
 export function ResponseCard({ block, onPrompt, busy }: Props) {
+  const { locale } = useLanguage()
+
   switch (block.type) {
     case 'project':
       return <ProjectDetail project={block.project} />
@@ -61,7 +65,7 @@ export function ResponseCard({ block, onPrompt, busy }: Props) {
                 <button
                   disabled={busy}
                   onClick={(e) =>
-                    onPrompt(`Tell me more about ${p.name}`, e.currentTarget.querySelector<HTMLElement>('[data-morph]'))
+                    onPrompt(locale.prompts.tellMeAbout(p.name), e.currentTarget.querySelector<HTMLElement>('[data-morph]'))
                   }
                   className="group grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 py-4 text-left disabled:opacity-50 md:py-5"
                 >
@@ -212,7 +216,7 @@ export function ResponseCard({ block, onPrompt, busy }: Props) {
               <a href={`mailto:${block.email}`} className="group flex min-w-0 items-center gap-4">
                 <Mail size={16} className="shrink-0 text-dim transition-colors group-hover:text-accent" />
                 <span className="min-w-0">
-                  <span className="block font-mono text-[10px] uppercase tracking-wider text-dim">Email</span>
+                  <span className="block font-mono text-[10px] uppercase tracking-wider text-dim">{locale.ui.responseCard.email}</span>
                   <span className="block truncate text-base tracking-tight transition-colors group-hover:text-accent md:text-lg">
                     {block.email}
                   </span>

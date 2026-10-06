@@ -1,16 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AIInput, type AIInputHandle } from './components/AIInput/AIInput'
 import { Conversation } from './components/Conversation/Conversation'
 import { Landing } from './components/Landing/Landing'
 import { PromptSuggestion } from './components/PromptSuggestion/PromptSuggestion'
 import { TopBar } from './components/TopBar/TopBar'
-import { suggestedPrompts } from './data/responses'
 import { useAIConversation } from './hooks/useAIConversation'
+import { useLanguage } from './hooks/useLanguage'
+import { makeLocalEngine } from './services/assistant'
 import type { PromptHandler } from './types'
 import { transition, vtName } from './utils/viewTransition'
 
 export default function App() {
-  const convo = useAIConversation()
+  const { locale } = useLanguage()
+  const localeRef = useRef(locale)
+  localeRef.current = locale
+
+  const engine = useMemo(() => makeLocalEngine(() => localeRef.current), [])
+  const convo = useAIConversation(engine)
   const input = useRef<AIInputHandle>(null)
   const [morphId, setMorphId] = useState<string | null>(null)
 
@@ -78,7 +84,7 @@ export default function App() {
             <AIInput
               ref={input}
               size={started ? 'dock' : 'hero'}
-              placeholder={started ? 'Ask a follow-up…' : 'Ask me anything about Aby…'}
+              placeholder={started ? locale.ui.input.placeholderFollowUp : locale.ui.input.placeholder}
               busy={thinking}
               onSubmit={(text) => send(text, null)}
             />
@@ -86,14 +92,14 @@ export default function App() {
             {!started && (
               <>
                 <div className="mt-5 flex flex-wrap justify-center gap-2">
-                  {suggestedPrompts.map((p, i) => (
+                  {locale.suggestedPrompts.map((p, i) => (
                     <PromptSuggestion key={p} label={p} onPrompt={send} delay={300 + i * 60} />
                   ))}
                 </div>
                 <p className="mt-6 hidden justify-center gap-5 font-mono text-[10px] uppercase tracking-[0.16em] text-dim md:flex">
-                  <span>↵ send</span>
-                  <span>⇧ ↵ new line</span>
-                  <span>/ focus</span>
+                  <span>{locale.ui.keyboard.send}</span>
+                  <span>{locale.ui.keyboard.newline}</span>
+                  <span>{locale.ui.keyboard.focus}</span>
                 </p>
               </>
             )}

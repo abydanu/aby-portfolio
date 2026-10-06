@@ -25,6 +25,8 @@ const RULES: [Scored, Rule[]][] = [
       [/\bhow (was|is) (this|it) (built|made)\b/, 7],
       [/\bwho am i talking to\b/, 7],
       [/\b(chatgpt|gpt|openai|llm)\b/, 3],
+      [/\b(kamu|anda) (siapa|apa)\b/, 7],
+      [/\b(bagaimana|gimana) (kamu|ini|sistem ini) (bekerja|kerja|dibuat)\b/, 7],
     ],
   ],
   [
@@ -35,6 +37,10 @@ const RULES: [Scored, Rule[]][] = [
       [/\babout (aby|him|himself)\b/, 3],
       [/\b(introduce|intro|bio|profile|background|overview)\b/, 3],
       [/\bwho\b/, 1],
+      [/\b(ceritakan|ceritain|jelaskan) (soal |tentang )?(aby|dia|dirinya)\b/, 6],
+      [/\b(tentang|soal|profil|biodata) (aby|dia|dirinya)\b/, 5],
+      [/\bsiapa (aby|dia|dirinya)\b/, 6],
+      [/\b(aby|dia|dirinya) (itu )?siapa\b/, 6],
     ],
   ],
   [
@@ -43,16 +49,22 @@ const RULES: [Scored, Rule[]][] = [
       [/\bwhat (does|do) (he|aby) (do|build|make|work on|specialize|specialise)\b/, 6],
       [/\b(specialize|specialise|specialization|speciality|specialty)\b/, 5],
       [/\b(focus|focused|focusing|currently|right now|interests?|passionate)\b/, 3],
+      [/\b(apa (yang )?(dia|aby) (kerjakan|ngerjain|kerjain|lakukan|buat|fokus|spesialis))\b/, 6],
+      [/\b(aby|dia) (biasanya )?(ngerjain|kerjain|kerjakan)\b/, 6],
+      [/\b(fokus|minat|keahlian utama|spesialisasi)\b/, 4],
     ],
   ],
   [
     'projects',
     [
       [/\bprojects?\b/, 5],
+      [/\bproject\w*\b/, 5],
       [/\bshow me (his |aby )?work\b/, 4],
       [/\b(portfolio|case stud(y|ies)|demos?|apps?|systems?)\b/, 2],
       [/\b(built|shipped|made|created|developed)\b/, 2],
       [/\b(backend|back end|apis?|rest)\b/, 2],
+      [/\b(proyek\w*|portofolio|karya|hasil kerja)\b/, 5],
+      [/\b(tampilkan|lihat|tunjukkan) (project\w*|proyek|karya|portofolio|pekerjaan)\b/, 6],
     ],
   ],
   [
@@ -62,6 +74,8 @@ const RULES: [Scored, Rule[]][] = [
       [/\bmachine learning\b/, 5],
       [/\bartificial intelligence\b/, 5],
       [/\b(computer vision|deep learning|neural|yolo|data science|models?)\b/, 3],
+      [/\b(pengalaman ai|kecerdasan buatan|pembelajaran mesin)\b/, 5],
+      [/\bai[- ]?nya\b/, 4],
     ],
   ],
   [
@@ -70,6 +84,8 @@ const RULES: [Scored, Rule[]][] = [
       [/\b(skills?|skillset|stack|technolog\w+|tech|tools?|toolchain|languages?|frameworks?|libraries|capabilit\w+)\b/, 5],
       [/\bwhat (does|do) (he|aby) (use|know)\b/, 6],
       [/\b(use|uses|using|know|knows|familiar)\b/, 1],
+      [/\b(keahlian|kemampuan|teknologi|tech stack|stack teknologi|stack[- ]?nya)\b/, 5],
+      [/\b(teknologi apa (yang )?(dia|aby) (gunakan|pakai|kuasai))\b/, 6],
     ],
   ],
   [
@@ -79,11 +95,17 @@ const RULES: [Scored, Rule[]][] = [
       [/\b(career|employment|jobs?|work history|worked|intern|internship|interned|roles?|resume|cv|telkom|employer|companies|company|professional)\b/, 4],
       [/\bwork(ed|ing)? (at|for|with)\b/, 3],
       [/\btimeline\b/, 3],
+      [/\b(pengalaman(?! ai)|pekerjaan|karir|riwayat kerja|magang|profesional)\b/, 5],
+      [/\b(tampilkan|lihat) (pengalaman|pekerjaan)\b/, 6],
     ],
   ],
   [
     'education',
-    [[/\b(education|educat\w+|study|studied|studying|university|college|degree|school|unesa|major|student|graduate|graduated|smk)\b/, 5]],
+    [
+      [/\b(education|educat\w+|study|studied|studying|university|college|degree|school|unesa|major|student|graduate|graduated|smk)\b/, 5],
+      [/\b(pendidikan|kuliah|studi|universitas|sekolah|jurusan|mahasiswa|lulus)\b/, 5],
+      [/\b(di mana (aby|dia) (kuliah|belajar|sekolah))\b/, 6],
+    ],
   ],
   [
     'achievements',
@@ -92,6 +114,7 @@ const RULES: [Scored, Rule[]][] = [
         /\b(achievements?|achieved|accomplish\w*|awards?|competitions?|certifications?|certified|certificate|won|win|winner|rank(ed|ing)?|prize|lks|bnsp|placed|medal)\b/,
         5,
       ],
+      [/\b(prestasi|pencapaian|penghargaan|kompetisi|sertifikasi|juara|peringkat)\b/, 5],
     ],
   ],
   [
@@ -101,6 +124,9 @@ const RULES: [Scored, Rule[]][] = [
         /\b(contact|email|e mail|mail|hire|hiring|reach|linkedin|github|socials?|get in touch|available|availability|collaborat\w+|freelance|connect|talk to|message him|phone|whatsapp)\b/,
         5,
       ],
+      [/\b(kontak|hubungi|email|emailnya|rekrut|kerjasama|kolaborasi|whatsapp|telepon|sosial media)\b/, 5],
+      [/\b(bagaimana|gimana) (cara )?(hubungi|menghubungi|kontak)\b/, 6],
+      [/\bkontak (aby|dia)\b/, 6],
     ],
   ],
 ]
@@ -134,14 +160,17 @@ export function parseIntent(input: string): Intent {
   if (!q) return { name: 'fallback' }
   const words = q.split(' ').length
 
-  if (words <= 5 && /\b(thanks|thank you|thx|terima kasih)\b/.test(q)) return { name: 'thanks' }
-  if (words <= 4 && /^(hi|hello|hey|hola|halo|yo|sup|good (morning|afternoon|evening))\b/.test(q)) {
+  if (words <= 5 && /\b(thanks|thank you|thx|terima kasih|makasih)\b/.test(q)) return { name: 'thanks' }
+  if (
+    words <= 4 &&
+    /^(hi|hello|hey|hola|halo|hai|yo|sup|selamat (pagi|siang|sore|malam)|good (morning|afternoon|evening))\b/.test(q)
+  ) {
     return { name: 'greeting' }
   }
 
   // A named project always wins unless the visitor is clearly asking for the list.
   const projectId = findProject(q)
-  if (projectId && !/\b(all|every|list)\b.*\bprojects\b/.test(q)) {
+  if (projectId && !/\b(all|every|list|semua|daftar)\b.*\b(projects|proyek)\b/.test(q)) {
     return { name: 'project', projectId }
   }
 

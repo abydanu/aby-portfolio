@@ -1,3 +1,4 @@
+import { getLocale, type Locale } from '../i18n'
 import type { AIResponse, Message } from '../types'
 import { parseIntent } from '../utils/intentParser'
 import { generateResponse } from '../utils/responseGenerator'
@@ -15,9 +16,14 @@ export interface AssistantEngine {
   respondSync?(prompt: string): AIResponse
 }
 
-const respondSync = (prompt: string): AIResponse => generateResponse(parseIntent(prompt))
+export function makeLocalEngine(getLocale: () => Locale): AssistantEngine {
+  const respondSync = (prompt: string): AIResponse => generateResponse(parseIntent(prompt), getLocale())
 
-export const localEngine: AssistantEngine = {
-  respondSync,
-  respond: async (prompt) => respondSync(prompt),
+  return {
+    respondSync,
+    respond: async (prompt) => respondSync(prompt),
+  }
 }
+
+/** Default engine using English. Prefer `makeLocalEngine` with `useLanguage` in the app. */
+export const localEngine = makeLocalEngine(() => getLocale('en'))

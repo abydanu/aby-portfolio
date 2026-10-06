@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { ArrowUp } from 'lucide-react'
+import { useLanguage } from '../../hooks/useLanguage'
 
 export interface AIInputHandle {
   focus: () => void
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const AIInput = forwardRef<AIInputHandle, Props>(function AIInput({ onSubmit, placeholder, size, busy }, ref) {
+  const { locale } = useLanguage()
   const [value, setValue] = useState('')
   const area = useRef<HTMLTextAreaElement>(null)
   useImperativeHandle(ref, () => ({ focus: () => area.current?.focus() }))
@@ -50,7 +52,7 @@ export const AIInput = forwardRef<AIInputHandle, Props>(function AIInput({ onSub
           onKeyDown={onKeyDown}
           rows={1}
           placeholder={placeholder}
-          aria-label="Ask a question about Aby"
+          aria-label={locale.ui.input.askLabel}
           enterKeyHint="send"
           autoComplete="off"
           spellCheck={false}
@@ -62,7 +64,7 @@ export const AIInput = forwardRef<AIInputHandle, Props>(function AIInput({ onSub
         <button
           onClick={submit}
           disabled={!value.trim() || busy}
-          aria-label="Send"
+          aria-label={locale.ui.input.sendLabel}
           className="mb-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-ink transition-all duration-300 enabled:hover:scale-105 disabled:bg-raised disabled:text-dim"
         >
           <ArrowUp size={17} strokeWidth={2.4} />

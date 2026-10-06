@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../../hooks/useLanguage'
+import { useTypewriter } from '../../hooks/useTypewriter'
+import type { AIResponse, PromptHandler } from '../../types'
 import { Presence } from '../Presence/Presence'
 import { PromptSuggestion } from '../PromptSuggestion/PromptSuggestion'
 import { ResponseCard } from '../ResponseCard/ResponseCard'
-import { useTypewriter } from '../../hooks/useTypewriter'
-import type { AIResponse, PromptHandler } from '../../types'
 
 interface Props {
   response: AIResponse
@@ -19,6 +20,7 @@ interface Props {
  * then follow-up prompts appear. Settling (or a new prompt) shows everything at once.
  */
 export function AIMessage({ response, settled, busy, onSettle, onProgress, onPrompt }: Props) {
+  const { locale } = useLanguage()
   const live = !settled
   const { shown, done } = useTypewriter(response.text, live)
   const total = response.blocks.length
@@ -54,7 +56,7 @@ export function AIMessage({ response, settled, busy, onSettle, onProgress, onPro
 
       <div className="min-w-0">
         <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
-          retrieved · {response.source}
+          {locale.ui.message.retrieved} · {response.source}
         </p>
 
         <p className="text-[1.2rem] font-light leading-[1.4] tracking-[-0.012em] text-fg md:text-[1.55rem]">
@@ -74,7 +76,7 @@ export function AIMessage({ response, settled, busy, onSettle, onProgress, onPro
 
         {allShown && response.followUps.length > 0 && (
           <div className="mt-10">
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Follow up</p>
+            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-dim">{locale.ui.message.followUp}</p>
             <div className="flex flex-wrap gap-2">
               {response.followUps.map((f, i) => (
                 <PromptSuggestion
