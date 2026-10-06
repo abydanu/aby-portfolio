@@ -129,11 +129,11 @@ export function ResponseCard({ block, onPrompt, busy }: Props) {
             {block.groups.map((g, gi) => (
               <div key={g.id} className="animate-rise" style={stagger(gi, 110)}>
                 <dt className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">{g.label}</dt>
-                <dd className="text-lg leading-relaxed tracking-tight text-fg/90 md:text-xl">
+                <dd className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-lg leading-relaxed tracking-tight text-fg/90 md:text-xl">
                   {g.items.map((item, i) => (
-                    <span key={item}>
-                      <span className="whitespace-nowrap">{item}</span>
-                      {i < g.items.length - 1 && <span className="mx-2 text-dim">·</span>}
+                    <span key={item} className="inline-flex items-baseline gap-x-2 whitespace-nowrap">
+                      {i > 0 && <span className="text-dim">·</span>}
+                      {item}
                     </span>
                   ))}
                 </dd>

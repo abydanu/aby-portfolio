@@ -48,7 +48,7 @@ export function Conversation({ messages, phase, morphId, onPrompt, onSettle }: P
   const lastUserId = [...messages].reverse().find((m) => m.role === 'user')?.id
 
   return (
-    <div className="mx-auto w-full max-w-176 flex-1 px-5 pb-6 pt-24 md:pt-28">
+    <div className="mx-auto w-full min-w-0 max-w-176 flex-1 px-5 pb-36 pt-24 md:pb-32 md:pt-28">
       <div className="space-y-12">
         {messages.map((m) =>
           m.role === 'user' ? (
