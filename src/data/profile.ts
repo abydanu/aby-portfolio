@@ -1,0 +1,22 @@
+export const profile = {
+  name: 'Aby Danu',
+  fullName: 'Aby Danu Prasetyo',
+  role: 'AI & Backend Engineer',
+  tagline: 'Building backend systems, intelligent applications, and exploring machine learning.',
+  location: 'Surabaya, Indonesia',
+  focus: 'Backend systems · AI/ML',
+  status: 'Open to opportunities',
+  email: 'abydanuprasetyo@gmail.com',
+  github: 'https://github.com/abydanu',
+  githubHandle: 'github.com/abydanu',
+  linkedin: 'https://linkedin.com/in/aby-danu',
+  linkedinHandle: 'linkedin.com/in/aby-danu',
+  interests: [
+    'Backend architecture',
+    'Artificial intelligence',
+    'Machine learning',
+    'Computer vision',
+    'Data processing',
+    'Developer tools',
+  ],
+}
