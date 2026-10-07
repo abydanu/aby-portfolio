@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AIInput, type AIInputHandle } from "./components/AIInput/AIInput";
 import { Conversation } from "./components/Conversation/Conversation";
 import { Landing } from "./components/Landing/Landing";
-import SplashCursor from "./components/ui/ClickSpark";
 import { PromptSuggestion } from "./components/PromptSuggestion/PromptSuggestion";
 import { TopBar } from "./components/TopBar/TopBar";
 import { useAIConversation } from "./hooks/useAIConversation";
