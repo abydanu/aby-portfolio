@@ -212,7 +212,7 @@ export const en: Locale = {
   },
   education: {
     unesa: {
-      title: 'B.Sc. Information Systems',
+      title: 'Information Systems',
       subtitle: 'Universitas Negeri Surabaya',
       detail: 'Currently studying — mostly backend and AI/ML.',
     },

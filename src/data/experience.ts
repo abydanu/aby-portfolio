@@ -2,18 +2,18 @@ import type { Achievement, TimelineItem } from '../types'
 
 export const experience: TimelineItem[] = [
   {
+    id: 'telkom',
+    period: 'Sep 2025 – Feb 2026',
+    title: 'Full Stack Developer',
+    subtitle: 'Telkom Indonesia · Witel Madiun',
+    detail: 'Built backend features for sales workflows.',
+  },
+  {
     id: 'ofcas',
     period: '2025',
     title: 'Programming Instructor',
     subtitle: 'OFCAS IT Community',
     detail: 'Mentors students in programming.',
-  },
-  {
-    id: 'telkom',
-    period: 'Sep – Dec 2024',
-    title: 'Full Stack Developer',
-    subtitle: 'Telkom Indonesia · Witel Madiun',
-    detail: 'Built backend features for sales workflows.',
   },
   {
     id: 'ubd',
@@ -28,7 +28,7 @@ export const education: TimelineItem[] = [
   {
     id: 'unesa',
     period: 'From 2026',
-    title: 'B.Sc. Information Systems',
+    title: 'Information Systems',
     subtitle: 'Universitas Negeri Surabaya',
     detail: 'Currently studying, with a focus on backend systems and AI/ML.',
   },
