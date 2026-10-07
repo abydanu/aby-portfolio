@@ -34,7 +34,7 @@ export const education: TimelineItem[] = [
   },
   {
     id: 'smk',
-    period: 'From 2023',
+    period: 'From 2023 - 2026',
     title: 'Software Engineering',
     subtitle: 'SMKN 1 Mejayan',
     detail: 'Vocational track where he started building software.',
@@ -62,5 +62,12 @@ export const achievements: Achievement[] = [
     title: 'BNSP Junior Programmer',
     context: 'National professional competency certification.',
     date: '2026',
+  },
+  {
+    id: 'ambiss',
+    result: 'Finalist',
+    title: 'Businnes Model Canvas Competition · Teman Ambiss',
+    context: 'National business model competition focused on developing and presenting a business idea.',
+    date: 'Dec 2025',
   },
 ]

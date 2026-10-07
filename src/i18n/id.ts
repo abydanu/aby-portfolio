@@ -345,6 +345,10 @@ export const id: Locale = {
       title: 'BNSP Junior Programmer',
       context: 'Sertifikasi kompetensi profesi nasional.',
     },
+    ambiss: {
+      title: 'Businnes Model Canvas Competition · Teman Ambiss',
+      context: 'Lomba business model tingkat nasional yang fokus mengembangkan dan mempresentasikan ide bisnis.',
+    },
   },
   stackGroups: {
     languages: 'Languages',

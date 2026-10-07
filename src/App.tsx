@@ -11,7 +11,7 @@ import type { PromptHandler } from "./types";
 import { transition, vtName } from "./utils/viewTransition";
 
 export default function App() {
-  const { locale } = useLanguage();
+  const { locale, language } = useLanguage();
   const localeRef = useRef(locale);
   localeRef.current = locale;
 
@@ -107,7 +107,11 @@ export default function App() {
                     />
                   ))}
                 </div>
-                <p className="mt-6 hidden justify-center gap-5 font-mono text-[10px] uppercase tracking-[0.16em] text-dim md:flex">
+                <p
+                  key={`keyboard-${language}`}
+                  className="animate-rise mt-6 hidden justify-center gap-5 font-mono text-[10px] uppercase tracking-[0.16em] text-dim md:flex"
+                  style={{ animationDelay: "160ms" }}
+                >
                   <span>{locale.ui.keyboard.send}</span>
                   <span>{locale.ui.keyboard.newline}</span>
                   <span>{locale.ui.keyboard.focus}</span>
