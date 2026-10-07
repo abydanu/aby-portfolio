@@ -14,17 +14,14 @@ export function Landing() {
         <div className="animate-rise">
           <Presence size={46} className="mx-auto mb-9" />
         </div>
-        <h1
-          className="animate-rise font-display text-[3.6rem] leading-[0.94] tracking-[-0.02em] sm:text-7xl md:text-[5.75rem]"
-          style={{ animationDelay: "80ms" }}
-        >
-          <span className="text-fg/55 sm:inline">{t.hi}</span>{" "}
+        <h1 className="font-display text-[3.6rem] leading-[0.94] tracking-[-0.02em] sm:text-7xl md:text-[5.75rem]">
+          <span className="animate-rise text-fg/55 sm:inline">{t.hi}</span>{" "}
           <BlurText
             text={`${profile.name}.`}
-            delay={200}
+            delay={150}
             animateBy="words"
             direction="top"
-            className="inline-flex italic"
+            className="italic"
           />
         </h1>
         <p
